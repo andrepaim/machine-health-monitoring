@@ -42,7 +42,9 @@ onde:
 - `id_da_maquina` é um identificador único da máquina. Você pode usar o UUID (Universally Unique Identifier) da máquina como um identificador único. O UUID é um identificador padrão para recursos em um sistema de computação e pode ser obtido em uma máquina Linux usando o comando `cat /etc/machine-id`.
 - `nome_do_sensor` é o nome do sensor que está sendo monitorado.
 
-O módulo SensorMonitor deve ser capaz de ajustar a frequência com que cada sensor é lido e publicado. Esta frequência pode ser configurada via linha de comando ou por meio de um arquivo de configurações. O módulo deve ser projetado de maneira que a leitura e publicação de cada sensor seja realizada em uma tarefa distinta. Uma tarefa pode ser implementada como uma thread, um processo, ou utilizando um modelo de programação assíncrona. O objetivo aqui é que cada sensor possa ser lido e publicado de forma independente, sem bloquear a leitura e publicação de outros sensores.
+O módulo SensorMonitor deve ser capaz de ajustar a frequência com que cada sensor é lido e publicado. Esta frequência pode ser configurada via linha de comando ou por meio de um arquivo de configurações. 
+
+O módulo deve ser projetado de maneira que a leitura e publicação de cada sensor seja realizada em uma tarefa distinta. Uma tarefa pode ser implementada como uma thread, um processo, ou utilizando um modelo de programação assíncrona. O objetivo aqui é que cada sensor possa ser lido e publicado de forma independente, sem bloquear a leitura e publicação de outros sensores.
 
 ### Formato da Mensagem
 
