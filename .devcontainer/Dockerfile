@@ -3,7 +3,6 @@ FROM ubuntu:20.04
 
 ENV VCPKG_ROOT /usr/vcpkg
 
-RUN echo "deb [ arch=amd64,arm64 ] https://repo.mongodb.org/apt/ubuntu focal/mongodb-org/4.4 multiverse" | sudo tee /etc/apt/sources.list.d/mongodb-org-4.4.list
 
 # Install necessary dependencies
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
@@ -15,7 +14,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       sudo \
       mosquitto \
       libssl-dev \
-      mongodb-org \
       doxygen \
       graphviz \
       && rm -rf /var/lib/apt/lists/*
@@ -44,9 +42,6 @@ WORKDIR /paho.mqtt.cpp
 RUN cmake -Bbuild -H. -DPAHO_BUILD_STATIC=ON -DPAHO_BUILD_DOCUMENTATION=TRUE -DPAHO_BUILD_SAMPLES=TRUE
 RUN sudo cmake --build build/ --target install
 RUN sudo ldconfig
-
-# start mongodb
-RUN sudo systemctl start mongod.service
 
 # Add a non-root user
 ARG USERNAME=developer
