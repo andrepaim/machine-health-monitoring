@@ -1,9 +1,6 @@
 # Use the official Ubuntu image as the base
 FROM ubuntu:20.04
 
-ENV VCPKG_ROOT /usr/vcpkg
-
-
 # Install necessary dependencies
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       cmake \
