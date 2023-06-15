@@ -3,7 +3,6 @@ services:
     build: 
       context: .
       dockerfile: Dockerfile
-      args:
     volumes:
       - ..:/workspace:cached
 
@@ -27,9 +26,9 @@ services:
 
     # Uncomment to change startup options
     # environment:
-    MONGO_INITDB_ROOT_USERNAME: root
-    MONGO_INITDB_ROOT_PASSWORD: example
-    MONGO_INITDB_DATABASE: atr
+    #MONGO_INITDB_ROOT_USERNAME: root
+    #MONGO_INITDB_ROOT_PASSWORD: example
+    #MONGO_INITDB_DATABASE: atr
 
     # Add "forwardPorts": ["27017"] to **devcontainer.json** to forward MongoDB locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
