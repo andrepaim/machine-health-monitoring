@@ -13,7 +13,7 @@ O sistema será composto pelos seguintes módulos:
 
 3. **MQTT Broker**: Este é o corretor MQTT que facilitará a comunicação entre o SensorMonitor e o DataProcessor.
 
-4. **Banco de Dados **: Este módulo será responsável por persistir todas as informações. Iremos utilizar o MongoDB.
+4. **Banco de Dados**: Este módulo será responsável por persistir todas as informações. Iremos utilizar o MongoDB.
 
 5. **Ferramenta de Visualização de Dados**: Este módulo será responsável pela visualização dos dados. Iremos usar o Grafana.
 
