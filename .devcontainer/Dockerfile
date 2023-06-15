@@ -1,16 +1,47 @@
 # Use the official Ubuntu image as the base
 FROM ubuntu:20.04
 
+ENV VCPKG_ROOT /usr/vcpkg
+
 # Install necessary dependencies
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       cmake \
       build-essential \
       gdb \
       git \
-      libboost-all-dev \
       netcat \
       sudo \
+      mosquitto \
+      libssl-dev \
+      doxygen \
+      graphviz \
       && rm -rf /var/lib/apt/lists/*
+
+# Go back to parent directory
+WORKDIR /
+
+# Clone the Paho MQTT C library
+RUN git clone https://github.com/eclipse/paho.mqtt.c.git
+WORKDIR /paho.mqtt.c
+RUN git checkout v1.3.12
+
+# Make and install the Paho MQTT C library
+RUN cmake -Bbuild -H. -DPAHO_ENABLE_TESTING=OFF -DPAHO_BUILD_STATIC=ON -DPAHO_WITH_SSL=ON -DPAHO_INSTALL_CMAKE=ON
+RUN sudo cmake --build build/ --target install
+RUN sudo ldconfig
+
+# Go back to parent directory
+WORKDIR /
+
+# Clone the Paho MQTT C++ library
+RUN git clone https://github.com/eclipse/paho.mqtt.cpp
+WORKDIR /paho.mqtt.cpp
+
+# Make and install the Paho MQTT C++ library
+RUN cmake -Bbuild -H. -DPAHO_BUILD_STATIC=ON -DPAHO_BUILD_DOCUMENTATION=TRUE -DPAHO_BUILD_SAMPLES=TRUE
+RUN sudo cmake --build build/ --target install
+RUN sudo ldconfig
+
 
 # Add a non-root user
 ARG USERNAME=developer

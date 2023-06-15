@@ -1,23 +1,12 @@
-cmake_minimum_required(VERSION 3.10)
-project(data-aquisition-system)
+cmake_minimum_required(VERSION 3.5)
+project(mqtt_samples)
 
-# set C++ standard
-set(CMAKE_CXX_STANDARD 17)
-set(CMAKE_CXX_STANDARD_REQUIRED ON)
-set(CMAKE_THREAD_PREFER_PTHREAD ON)                                                                                                                                                                                                           
-set(THREADS_PREFER_PTHREAD_FLAG ON)                                                                                                                                                                                                           
-find_package(Threads REQUIRED)                                                                                                                                                                                                                
+set(CMAKE_CXX_STANDARD 11)
 
+find_package(PahoMqttCpp REQUIRED)
 
-# find Boost
-find_package(Boost 1.65.1 REQUIRED COMPONENTS system)
+add_executable(mqtt_subscriber mqtt_subscriber.cpp)
+target_link_libraries(mqtt_subscriber PahoMqttCpp::paho-mqttpp3)
 
-# include directories
-include_directories(${Boost_INCLUDE_DIRS} src)
-
-# target executable and its source files
-add_executable(das src/main.cpp)
-
-# link Boost libraries to the target executable
-target_link_libraries(das ${Boost_LIBRARIES})
-target_link_libraries(das  Threads::Threads)                                                                                                 
+add_executable(mqtt_publisher mqtt_publisher.cpp)
+target_link_libraries(mqtt_publisher PahoMqttCpp::paho-mqttpp3)
