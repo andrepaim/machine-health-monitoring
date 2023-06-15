@@ -5,8 +5,8 @@ set(CMAKE_CXX_STANDARD 11)
 
 find_package(PahoMqttCpp REQUIRED)
 
-add_executable(mqtt_subscriber mqtt_subscriber.cpp)
-target_link_libraries(mqtt_subscriber PahoMqttCpp::paho-mqttpp3)
+add_executable(sensor_monitor sensor_monitor.cpp)
+target_link_libraries(sensor_monitor PahoMqttCpp::paho-mqttpp3)
 
-add_executable(mqtt_publisher mqtt_publisher.cpp)
-target_link_libraries(mqtt_publisher PahoMqttCpp::paho-mqttpp3)
+add_executable(data_processor data_processor.cpp)
+target_link_libraries(data_processor PahoMqttCpp::paho-mqttpp3)
