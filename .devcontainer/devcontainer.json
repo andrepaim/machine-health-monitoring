@@ -1,10 +1,8 @@
 {
 	"name": "C++",
-	"build": {
-    "dockerComposeFile": "docker-compose.yml",
-    "service": "app",
-    "workspaceFolder": "/workspace"
-  },
+  "dockerComposeFile": "docker-compose.yml",
+  "service": "app",
+  "workspaceFolder": "/workspace",
 
 
 	"customizations": {
