@@ -13,12 +13,11 @@ O sistema será composto pelos seguintes módulos:
 
 3. **MQTT Broker**: Este é o corretor MQTT que facilitará a comunicação entre o SensorMonitor e o DataProcessor.
 
-4. **Banco de Dados de Séries Temporais**: Este módulo será responsável por persistir todas as informações. Você deve considerar uma solução de código aberto que seja capaz de se inscrever em todos os tópicos e persistir as mensagens.
+4. **Banco de Dados **: Este módulo será responsável por persistir todas as informações. Iremos utilizar o MongoDB.
 
-5. **Ferramenta de Visualização de Dados**: Este módulo será responsável pela visualização dos dados. Você deve escolher uma ferramenta de visualização de código aberto que seja capaz de ler dados do seu banco de dados de séries temporais e exibir as informações de maneira útil e intuitiva.
+5. **Ferramenta de Visualização de Dados**: Este módulo será responsável pela visualização dos dados. Iremos usar o Grafana.
 
 Esses módulos trabalharão em conjunto para fornecer uma visão holística da saúde das máquinas, permitindo intervenções oportunas e manutenção proativa.
-
 
 
 ## SensorMonitor (Monitor de Sensores)
@@ -33,11 +32,10 @@ O primeiro módulo que você irá desenvolver será o **SensorMonitor**. Este m�
 Cada leitura de sensor será publicada em um tópico MQTT específico. O tópico para cada sensor deve seguir o formato:
 
 ```
-/<id_do_aluno>/<id_da_maquina>/<nome_do_sensor>
+/sensors/<id_da_maquina>/<nome_do_sensor>
 ```
 onde:
 
-- `id_do_aluno` é o número de matrícula de um dos integrantes da dupla
 - `id_da_maquina` é um identificador único da máquina. Você pode usar o UUID (Universally Unique Identifier) da máquina como um identificador único. O UUID é um identificador padrão para recursos em um sistema de computação e pode ser obtido em uma máquina Linux usando o comando `cat /etc/machine-id`.
 - `nome_do_sensor` é o nome do sensor que está sendo monitorado.
 
@@ -70,7 +68,6 @@ No início da execução, e a cada intervalo de tempo configurável, o **SensorM
 
 ```json
 {
-    "id_do_aluno": "<student_id>",
     "id_da_maquina": "<machine_id>",
     "sensores": [
         {
@@ -85,7 +82,6 @@ No início da execução, e a cada intervalo de tempo configurável, o **SensorM
 
 onde:
 
-- `id_do_aluno` é o número de matrícula de um dos integrantes da dupla
 - `id_da_maquina` é o identificador único da máquina
 - `sensores` é uma lista dos sensores que serão monitorados. Para cada sensor, deve-se fornecer:
   - `nome_do_sensor`: o nome do sensor que está sendo monitorado
@@ -107,7 +103,6 @@ Os alarmes gerados pelo DataProcessor devem ser publicados no tópico `/alarms`.
 
 ```json
 {
-    "id_do_aluno": "<student_id>",
     "id_da_maquina": "<machine_id>",
     "id_do_sensor": "<sensor_id>",
     "descricao": "<alarm_description>"
@@ -115,7 +110,6 @@ Os alarmes gerados pelo DataProcessor devem ser publicados no tópico `/alarms`.
 ```
 onde:
 
-- `id_do_aluno` é o número de matrícula de um dos integrantes da dupla
 - `id_da_maquina` é o identificador único da máquina
 - `id_do_sensor` é o nome do sensor que está sendo monitorado
 - `descricao` é uma descrição textual do alarme. 
