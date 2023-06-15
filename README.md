@@ -32,12 +32,12 @@ O primeiro módulo que você irá desenvolver será o **SensorMonitor**. Este m�
 Cada leitura de sensor será publicada em um tópico MQTT específico. O tópico para cada sensor deve seguir o formato:
 
 ```
-/sensors/<id_da_maquina>/<nome_do_sensor>
+/sensors/<id_da_maquina>/<id_do_sensor>
 ```
 onde:
 
 - `id_da_maquina` é um identificador único da máquina. Você pode usar o UUID (Universally Unique Identifier) da máquina como um identificador único. O UUID é um identificador padrão para recursos em um sistema de computação e pode ser obtido em uma máquina Linux usando o comando `cat /etc/machine-id`.
-- `nome_do_sensor` é o nome do sensor que está sendo monitorado.
+- `id_do_sensor` é o identificador do sensor que está sendo monitorado, por exemplo, `cpu_temperature`.
 
 O módulo SensorMonitor deve ser capaz de ajustar a frequência com 
  cada sensor é lido e publicado. Esta frequência pode ser configurada via linha de comando ou por meio de um arquivo de configurações. 
@@ -68,12 +68,12 @@ No início da execução, e a cada intervalo de tempo configurável, o **SensorM
 
 ```json
 {
-    "id_da_maquina": "<machine_id>",
-    "sensores": [
+    "machine_id": "id_da_maquina",
+    "sensors": [
         {
-            "nome_do_sensor": "<sensor_name>",
-            "tipo_de_dado": "<data_type>",
-            "periodicidade": <data_interval>
+            "sensor_id": "id_do_sensor",
+            "data_type": "tipo_do_dado",
+            "data_interval": periodicidade
         },
         ...
     ]
@@ -82,11 +82,11 @@ No início da execução, e a cada intervalo de tempo configurável, o **SensorM
 
 onde:
 
-- `id_da_maquina` é o identificador único da máquina
-- `sensores` é uma lista dos sensores que serão monitorados. Para cada sensor, deve-se fornecer:
-  - `nome_do_sensor`: o nome do sensor que está sendo monitorado
-  - `tipo_de_dado`: o tipo de dado da leitura do sensor (por exemplo, int, float)
-  -  `periodicidade`: periocidade do envio dos dados (em milissegundos)
+- `machine_id` é o identificador único da máquina
+- `sensors` é uma lista dos sensores que serão monitorados. Para cada sensor, deve-se fornecer:
+  - `sensor_id`: o nome do sensor que está sendo monitorado
+  - `data_type`: o tipo de dado da leitura do sensor (por exemplo, int, float)
+  -  `data_interval`: periocidade do envio dos dados (em milissegundos)
 
 Este processo de envio periódico da mensagem inicial ajuda a garantir que todos os componentes do sistema estejam cientes das estações de trabalho que estão sendo monitoradas e dos sensores que estão ativos. A frequência com que essa mensagem inicial é enviada pode ser configurada via linha de comando ou por meio de um arquivo de configurações.
 
@@ -103,16 +103,16 @@ Os alarmes gerados pelo DataProcessor devem ser publicados no tópico `/alarms`.
 
 ```json
 {
-    "id_da_maquina": "<machine_id>",
-    "id_do_sensor": "<sensor_id>",
-    "descricao": "<alarm_description>"
+    "machine_id": "id_da_maquina",
+    "sensor_id": "id_do_sensor",
+    "description": "descrição do alarme"
 }
 ```
 onde:
 
-- `id_da_maquina` é o identificador único da máquina
-- `id_do_sensor` é o nome do sensor que está sendo monitorado
-- `descricao` é uma descrição textual do alarme. 
+- `machine_id` é o identificador único da máquina
+- `sensor_id` é o nome do sensor que está sendo monitorado
+- `description` é uma descrição textual do alarme. 
  
 Para o alarme de inatividade, por exemplo, a descrição pode ser "Sensor inativo por dois períodos de tempo previstos".
 
