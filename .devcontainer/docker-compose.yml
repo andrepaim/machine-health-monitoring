@@ -13,12 +13,6 @@ services:
     # Uncomment the next line to use a non-root user for all processes.
     # user: node
 
-    # Use "forwardPorts" in **devcontainer.json** to forward an app port locally. 
-    # (Adding the "ports" property to this file will not forward from a Codespace.)
-  mosquitto:
-    image: eclipse-mosquitto
-    restart: unless-stopped
-
   db:
     image: mongo:latest
     restart: unless-stopped
@@ -52,7 +46,6 @@ services:
     ports:
       - 3001:3000
     volumes:
-      # declare your mount volume /host/dir:/container/dir
       - metabase-data:/metabase-data
     environment:
       MB_DB_TYPE: postgres
