@@ -22,12 +22,14 @@ Esses módulos trabalharão em conjunto para fornecer uma visão holística da s
 
 ## SensorMonitor (Monitor de Sensores)
 
-O primeiro módulo que você irá desenvolver será o **SensorMonitor**. Este módulo será responsável por coletar dados dos seguintes sensores em uma estação de trabalho:
+O primeiro módulo que você irá desenvolver será o **SensorMonitor**. Este módulo será responsável por coletar dados de sensores  de umauma estação de trabalho. Vocês devem definir quais sensores serão monitorados, exemplos de sensores são:
 
-1. Porcentagem de memória utilizada
-2. Porcentagem de CPU utilizada
-3. Porcentagem de disco utilizado
-4. Mais dois sensores à escolha dos alunos. Estes podem ser quaisquer sensores disponíveis na estação de trabalho, tais como temperatura da CPU, carga do sistema, tráfego de rede, entre outros.
+- Porcentagem de memória utilizada
+- Porcentagem de CPU utilizada
+- Porcentagem de disco utilizado
+- Ou qualquer outro sensor que voces escolham
+
+Vocês devem coletar no mínimo dois sensores (sugestão de um colega seus durante a aula).
 
 Cada leitura de sensor será publicada em um tópico MQTT específico. O tópico para cada sensor deve seguir o formato:
 
@@ -96,7 +98,7 @@ O segundo módulo que você irá desenvolver será o **DataProcessor**. Este mó
 
 O DataProcessor irá realizar dois tipos de processamento para cada nova mensagem de dados de um sensor:
 
-1. **Alarme de Inatividade:** O DataProcessor deve gerar um alarme sempre que um dado de um sensor não for enviado por dois períodos de tempo previstos. Este é um indicador de que algo pode estar errado com o sensor ou com a máquina que está sendo monitorada.
+1. **Alarme de Inatividade:** O DataProcessor deve gerar um alarme sempre que um dado de um sensor não for enviado por dez períodos de tempo previstos. Este é um indicador de que algo pode estar errado com o sensor ou com a máquina que está sendo monitorada.
 2. **Processamento Personalizado:** Vocês devem definir um segundo tipo de processamento para as leituras dos sensores. Isso pode ser qualquer tipo de análise ou cálculo baseado nos dados do sensor. Algumas ideias podem incluir cálculos de média móvel, detecção de outliers ou análise de tendências.
 
 Os alarmes gerados pelo DataProcessor devem ser publicados no tópico `/alarms`. Cada alarme deve ser uma mensagem JSON com o seguinte formato:
