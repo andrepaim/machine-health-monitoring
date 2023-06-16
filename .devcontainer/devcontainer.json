@@ -9,8 +9,9 @@
         "terminal.integrated.shell.linux": "/bin/bash"
       },
 			"extensions": [
-            "ms-vscode.cpptools", 
-            "ms-vscode.cmake-tools" 
+				"ms-vscode.cpptools",
+				"ms-vscode.cmake-tools",
+				"mongodb.mongodb-vscode"
 			]
 		}
 	},
