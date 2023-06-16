@@ -4,9 +4,10 @@ FROM ubuntu:20.04
 # Install necessary dependencies
 RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       cmake \
+      systemctl \
       build-essential \
       gdb \
-      git \
+:w      git \
       netcat \
       sudo \
       mosquitto \
@@ -17,6 +18,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 # Go back to parent directory
 WORKDIR /
+
+RUN sudo systemctl start mosquitto
 
 # Clone the Paho MQTT C library
 RUN git clone https://github.com/eclipse/paho.mqtt.c.git
