@@ -11,7 +11,7 @@ O sistema será composto pelos seguintes módulos:
 
 2. **DataProcessor (Processador de Dados)**: Este módulo será responsável por assinar os tópicos MQTT, processar os dados dos sensores (como análise de tendências, detecção de anomalias, análise da taxa de variação, etc.) e gerar alertas com base em certos critérios. Os resultados serão publicados em tópicos MQTT específicos.
 
-3. **MQTT Broker**: Este é o corretor MQTT que facilitará a comunicação entre o SensorMonitor e o DataProcessor.
+3. **MQTT Broker**: Este é o corretor MQTT que facilitará a comunicação entre o SensorMonitor e o DataProcessor. 
 
 4. **Banco de Dados**: Este módulo será responsável por persistir todas as informações. Iremos utilizar o MongoDB.
 
@@ -22,7 +22,7 @@ Esses módulos trabalharão em conjunto para fornecer uma visão holística da s
 
 ## SensorMonitor (Monitor de Sensores)
 
-O primeiro módulo que você irá desenvolver será o **SensorMonitor**. Este módulo será responsável por coletar dados de sensores  de umauma estação de trabalho. Vocês devem definir quais sensores serão monitorados, exemplos de sensores são:
+O primeiro módulo que você irá desenvolver será o **SensorMonitor**. Este módulo será responsável por coletar dados de sensores  de uma estação de trabalho. Vocês devem definir quais sensores serão monitorados, exemplos de sensores são:
 
 - Porcentagem de memória utilizada
 - Porcentagem de CPU utilizada
