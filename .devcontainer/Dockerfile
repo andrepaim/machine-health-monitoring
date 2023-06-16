@@ -11,7 +11,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       netcat \
       sudo \
       libboost-all-dev \
-      libmogoc-dev \
+      libmongoc-dev \
       libssl-dev \
       doxygen \
       graphviz \
