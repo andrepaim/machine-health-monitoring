@@ -10,7 +10,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       git \
       netcat \
       sudo \
-      mosquitto \
+      libboost-all-dev \
+      libmogoc-dev \
       libssl-dev \
       doxygen \
       graphviz \
@@ -18,8 +19,6 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
 
 # Go back to parent directory
 WORKDIR /
-
-RUN sudo systemctl start mosquitto
 
 # Clone the Paho MQTT C library
 RUN git clone https://github.com/eclipse/paho.mqtt.c.git

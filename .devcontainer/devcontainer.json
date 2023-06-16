@@ -18,7 +18,7 @@
 
   "remoteUser": "developer",
 
-  "forwardPorts": ["27017", "3001"],
+  "forwardPorts": [27017, 3001],
 
   "mounts": [
     "source=${localWorkspaceFolder},target=/workspace,type=bind,consistency=cached"
