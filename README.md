@@ -15,7 +15,7 @@ O sistema será composto pelos seguintes módulos:
 
 4. **Banco de Dados**: Este módulo será responsável por persistir todas as informações. Iremos utilizar o MongoDB.
 
-5. **Ferramenta de Visualização de Dados**: Este módulo será responsável pela visualização dos dados. Iremos usar o Grafana.
+5. **Ferramenta de Visualização de Dados**: Este módulo será responsável pela visualização dos dados.
 
 Esses módulos trabalharão em conjunto para fornecer uma visão holística da saúde das máquinas, permitindo intervenções oportunas e manutenção proativa.
 
