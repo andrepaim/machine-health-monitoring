@@ -6,6 +6,7 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       cmake \
       systemctl \
       build-essential \
+      pkg-config \
       gdb \
       git \
       netcat \
