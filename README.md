@@ -114,6 +114,21 @@ Os alarmes gerados pelo DataProcessor devem ser persistidos em uma coleção do 
 - `sensor_id` - string com nome do sensor que está sendo monitorado
 - `description` - string com uma descrição textual do alarme. 
  
-Para o alarme de inatividade, por exemplo, a descrição pode ser "Sensor inativo por dois períodos de tempo previstos".
+Para o alarme de inatividade, por exemplo, a descrição pode ser "Sensor inativo por dez períodos de tempo previstos".
 
 Ao projetar e implementar o módulo DataProcessor, lembre-se de que ele precisa ser capaz de processar dados de múltiplas máquinas e sensores simultaneamente, de modo a não perder ou atrasar a leitura de mensagens de qualquer tópico. Isso pode exigir o uso de técnicas de programação concorrente ou assíncrona.
+
+### Banco de Dados
+
+Como mencionado, iremos utilizar o MongoDB como banco de dados.
+
+O nosso projeto já tem uma extensão do Mongo para Visual Studio Code pre definida no devcontainer.
+
+Para acessar o Mongo e visualizar os dados persistidos, realize os seguintes passos:
+
+1. Clique no ícone de uma folha na barra lateral esquerda
+2. Clique em `Add connection`
+3. Clique em `Open Form` em `Advanced Connection Settings`
+4. Modifique o valor do campo `Hostname` para `db` e clique em `Connect`
+
+Se os passos forem executados com êxito, voce terá acesso a uma árvore de navegação das coleções do banco na aba lateral esquerda.
