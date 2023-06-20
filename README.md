@@ -7,7 +7,7 @@ O monitoramento da saúde de máquinas em ambientes industriais é crucial para 
 ## Visão geral da arquitetura do sistema
 O sistema será composto pelos seguintes módulos:
 
-1. **SensorMonitor (Monitor de Sensores)**: Este módulo será responsável por coletar dados de vários sensores de uma estação de trabalho, incluindo temperatura da CPU, carga do sistema, porcentagem de memória livre e porcentagem de espaço em disco livre. Ele publicará esses dados em tópicos MQTT específicos.
+1. **SensorMonitor (Monitor de Sensores)**: Este módulo será responsável por coletar dados de vários sensores de uma estação de trabalho, tais como temperatura da CPU, carga do sistema, porcentagem de memória livre e porcentagem de espaço em disco livre. Ele publicará esses dados em tópicos MQTT específicos.
 
 2. **DataProcessor (Processador de Dados)**: Este módulo será responsável por assinar os tópicos MQTT, processar os dados dos sensores (como análise de tendências, detecção de anomalias, análise da taxa de variação, etc.) e gerar alertas com base em certos critérios. Os resultados serão publicados em tópicos MQTT específicos.
 
