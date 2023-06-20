@@ -12,6 +12,8 @@ RUN apt-get update && DEBIAN_FRONTEND=noninteractive apt-get install -y \
       sudo \
       libboost-all-dev \
       libmongoc-dev \
+      libbson-dev \
+      mosquitto \
       libssl-dev \
       doxygen \
       graphviz \
