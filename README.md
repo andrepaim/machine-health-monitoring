@@ -94,9 +94,16 @@ Este processo de envio periódico da mensagem inicial ajuda a garantir que todos
 
 ## DataProcessor (Processador de Dados)
 
-O segundo módulo que você irá desenvolver será o **DataProcessor**. Este módulo será responsável por processar os dados dos sensores monitorados. O DataProcessor deve se inscrever no tópico `/sensor_monitors` e, para cada nova mensagem que indica uma nova máquina sendo monitorada, ele deve se inscrever nos tópicos correspondentes para cada sensor da máquina.
+O segundo módulo que você irá desenvolver será o **DataProcessor**. Este módulo será responsável por persistir e processar os dados dos sensores monitorados. 
 
-O DataProcessor irá realizar dois tipos de processamento para cada nova mensagem de dados de um sensor:
+O DataProcessor deve se inscrever no tópico `/sensor_monitors` e, para cada nova mensagem que indica uma nova máquina sendo monitorada, ele deve se inscrever nos tópicos correspondentes para cada sensor da máquina.
+
+Para cada nova mensagem recebida, este módulo deve persistir a mensagem no MongoDB (banco de dados NoSQL). As mensagens recebidas em cada tópico devem ser persistidas em coleções baseadas no `sensor_id` (o nome da collection será o `sensor_id`. O `machine_id` deve ser anexado a cada documento como um valor de string. Resumindo, cada documento deve ter três campos: 
+- `machine_id` : string
+- `timestamp` : formato de data e hora nativo do MongoDB
+- `value`: baseado no campo `data_type`
+  
+Além disso, o dataProcessor também irá realizar dois tipos de processamento para cada nova mensagem de dados de um sensor:
 
 1. **Alarme de Inatividade:** O DataProcessor deve gerar um alarme sempre que um dado de um sensor não for enviado por dez períodos de tempo previstos. Este é um indicador de que algo pode estar errado com o sensor ou com a máquina que está sendo monitorada.
 2. **Processamento Personalizado:** Vocês devem definir um segundo tipo de processamento para as leituras dos sensores. Isso pode ser qualquer tipo de análise ou cálculo baseado nos dados do sensor. Algumas ideias podem incluir cálculos de média móvel, detecção de outliers ou análise de tendências.
