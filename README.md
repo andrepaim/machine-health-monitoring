@@ -108,20 +108,11 @@ Além disso, o dataProcessor também irá realizar dois tipos de processamento p
 1. **Alarme de Inatividade:** O DataProcessor deve gerar um alarme sempre que um dado de um sensor não for enviado por dez períodos de tempo previstos. Este é um indicador de que algo pode estar errado com o sensor ou com a máquina que está sendo monitorada.
 2. **Processamento Personalizado:** Vocês devem definir um segundo tipo de processamento para as leituras dos sensores. Isso pode ser qualquer tipo de análise ou cálculo baseado nos dados do sensor. Algumas ideias podem incluir cálculos de média móvel, detecção de outliers ou análise de tendências.
 
-Os alarmes gerados pelo DataProcessor devem ser publicados no tópico `/alarms`. Cada alarme deve ser uma mensagem JSON com o seguinte formato:
+Os alarmes gerados pelo DataProcessor devem ser persistidos em uma coleção do MongoDb denominada`alarms`. Cada alarme deve ser um documento com os seguintes campos
 
-```json
-{
-    "machine_id": "id_da_maquina",
-    "sensor_id": "id_do_sensor",
-    "description": "descrição do alarme"
-}
-```
-onde:
-
-- `machine_id` é o identificador único da máquina
-- `sensor_id` é o nome do sensor que está sendo monitorado
-- `description` é uma descrição textual do alarme. 
+- `machine_id` -  string contendo identificador único da máquina
+- `sensor_id` - string com nome do sensor que está sendo monitorado
+- `description` - string com uma descrição textual do alarme. 
  
 Para o alarme de inatividade, por exemplo, a descrição pode ser "Sensor inativo por dois períodos de tempo previstos".
 
