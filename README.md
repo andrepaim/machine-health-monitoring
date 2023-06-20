@@ -118,7 +118,7 @@ Para o alarme de inatividade, por exemplo, a descrição pode ser "Sensor inativ
 
 Ao projetar e implementar o módulo DataProcessor, lembre-se de que ele precisa ser capaz de processar dados de múltiplas máquinas e sensores simultaneamente, de modo a não perder ou atrasar a leitura de mensagens de qualquer tópico. Isso pode exigir o uso de técnicas de programação concorrente ou assíncrona.
 
-### Banco de Dados
+## Banco de Dados
 
 Como mencionado, iremos utilizar o MongoDB como banco de dados.
 
