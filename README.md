@@ -122,9 +122,9 @@ Ao projetar e implementar o módulo DataProcessor, lembre-se de que ele precisa 
 
 ## Banco de Dados
 
-Como mencionado, iremos utilizar o MongoDB como banco de dados.
+Como mencionado, o repositório utiliza o MongoDB como banco de dados. Lembre-se que isso é apenas uma sugestão, vocês podem utilizar outro banco de dados a sua escolha.
 
-O nosso projeto já tem uma extensão do Mongo para Visual Studio Code pre definida no devcontainer.
+O repositório já tem uma extensão do Mongo para Visual Studio Code pre definida no devcontainer.
 
 Para acessar o Mongo e visualizar os dados persistidos, realize os seguintes passos:
 
