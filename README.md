@@ -15,9 +15,11 @@ O sistema será composto pelos seguintes módulos:
 
 4. **Banco de Dados**: Este módulo será responsável por persistir todas as informações. Iremos utilizar o MongoDB.
 
-5. **Ferramenta de Visualização de Dados**: Este módulo será responsável pela visualização dos dados.
+5. **Ferramenta de Visualização de Dados**: Este módulo será responsável pela visualização dos dados. Vocês devem explorar e definir uma ferramenta para realizar a visualização.
 
 Esses módulos trabalharão em conjunto para fornecer uma visão holística da saúde das máquinas, permitindo intervenções oportunas e manutenção proativa.
+
+O projeto tem exemplos de código para implementação dos módulos em C++, assim como a utilização do mosquitto como MQTT Broker e o MongoDB como banco de dados. Porém, é apenas uma sugestão. Voces podem utilizar outras linguagens e softwares.
 
 
 ## SensorMonitor (Monitor de Sensores)
