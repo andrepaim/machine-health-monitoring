@@ -28,20 +28,52 @@ services:
     # Add "forwardPorts": ["27017"] to **devcontainer.json** to forward MongoDB locally.
     # (Adding the "ports" property to this file will not forward from a Codespace.)
 
-  grafana:
-    image: ajeje93/grafana-mongodb:latest
+  # grafana:
+  #   image: ajeje93/grafana-mongodb:latest
+  #   ports:
+  #     - 3000:3000
+  #   restart: unless-stopped
+  #   volumes:
+  #     #- ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
+  #     - grafana-data:/var/lib/grafana
+  
+  postgres-db:
+    image: postgres
+    restart: always
     ports:
-      - 3000:3000
-    restart: unless-stopped
+      - 5432:5432
+    environment:
+      POSTGRES_PASSWORD: postgres
+      PGDATA: /var/lib/postgresql/data
     volumes:
-      #- ./grafana/provisioning/datasources:/etc/grafana/provisioning/datasources
-      - grafana-data:/var/lib/grafana
+      # declare your mount volume /host/dir:/container/dir
+      - pgdata:/var/lib/postgresql/data
+
+  metabase-app:
+    image: metabase/metabase
+    restart: always
+    ports:
+      - 3001:3000
+    volumes:
+      # declare your mount volume /host/dir:/container/dir
+      - metabase-data:/metabase-data
+    environment:
+      MB_DB_TYPE: postgres
+      MB_DB_DBNAME: metabase
+      MB_DB_PORT: 5432
+      MB_DB_USER: metabase
+      MB_DB_PASS: postgres
+      MB_DB_HOST: postgres-db
+    depends_on:
+      - postgres-db
+    links:
+      - postgres-db
       
 volumes:
   grafana-data:
 volumes:
   mongodb-data:
-  #metabase-data:
-  #pgdata:
+  metabase-data:
+  pgdata:
   influxdb-data:
   grafana-data:
