@@ -19,7 +19,7 @@ O sistema será composto pelos seguintes módulos:
 
 Esses módulos trabalharão em conjunto para fornecer uma visão holística da saúde das máquinas, permitindo intervenções oportunas e manutenção proativa.
 
-Este repostiório tem exemplos de código para implementação dos módulos em C++, assim como a utilização do mosquitto como MQTT Broker e o MongoDB como banco de dados. Porém, é apenas uma sugestão. Voces podem utilizar outras linguagens e softwares.
+Este repostiório tem exemplos de código para implementação dos módulos em C++, assim como a utilização do mosquitto como MQTT Broker. Porém, é apenas uma sugestão. Voces podem utilizar outras linguagens e softwares.
 
 
 ## SensorMonitor (Monitor de Sensores)
