@@ -17,7 +17,8 @@
 	"remoteUser": "developer",
 	"forwardPorts": [
 		27017,
-		3001
+		3001,
+		8080
 	],
 	"postStartCommand": "sudo systemctl start mosquitto",
 	"mounts": [
