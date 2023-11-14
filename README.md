@@ -13,9 +13,9 @@ O sistema será composto pelos seguintes módulos:
 
 3. **MQTT Broker**: Este é o corretor MQTT que facilitará a comunicação entre o SensorMonitor e o DataProcessor. 
 
-4. **Banco de Dados**: Este módulo será responsável por persistir todas as informações. Iremos utilizar o MongoDB.
+4. **Banco de Dados**: Este módulo será responsável por persistir todas as informações. Iremos utilizar o Graphite (Whisper).
 
-5. **Ferramenta de Visualização de Dados**: Este módulo será responsável pela visualização dos dados. Vocês devem explorar e definir uma ferramenta para realizar a visualização.
+5. **Ferramenta de Visualização de Dados**: Este módulo será responsável pela visualização dos dados. Iremos utilizar o Graphite (web)
 
 Esses módulos trabalharão em conjunto para fornecer uma visão holística da saúde das máquinas, permitindo intervenções oportunas e manutenção proativa.
 
@@ -100,37 +100,23 @@ O segundo módulo que você irá desenvolver será o **DataProcessor**. Este mó
 
 O DataProcessor deve se inscrever no tópico `/sensor_monitors` e, para cada nova mensagem que indica uma nova máquina sendo monitorada, ele deve se inscrever nos tópicos correspondentes para cada sensor da máquina.
 
-Para cada nova mensagem recebida, este módulo deve persistir a mensagem no MongoDB (banco de dados NoSQL). As mensagens recebidas em cada tópico devem ser persistidas em coleções baseadas no `sensor_id` (o nome da collection será o `sensor_id`. O `machine_id` deve ser anexado a cada documento como um valor de string. Resumindo, cada documento deve ter três campos: 
-- `machine_id` : string
-- `timestamp` : formato de data e hora nativo do MongoDB
-- `value`: baseado no campo `data_type`
+Para cada nova mensagem recebida, este módulo deve persistir a métrica recebida no Graphite (banco de dados de séries temporais). As mensagens recebidas em cada tópico devem ser persistidas `metric path`s baseados na  `machine-id` e `sensor-id`. Isto é, o `metric-path`a ser usado deve ser `machine-id`.`sendor-id`.
   
 Além disso, o dataProcessor também irá realizar dois tipos de processamento para cada nova mensagem de dados de um sensor:
 
 1. **Alarme de Inatividade:** O DataProcessor deve gerar um alarme sempre que um dado de um sensor não for enviado por dez períodos de tempo previstos. Este é um indicador de que algo pode estar errado com o sensor ou com a máquina que está sendo monitorada.
 2. **Processamento Personalizado:** Vocês devem definir um segundo tipo de processamento para as leituras dos sensores. Isso pode ser qualquer tipo de análise ou cálculo baseado nos dados do sensor. Algumas ideias podem incluir cálculos de média móvel, detecção de outliers ou análise de tendências.
 
-Os alarmes gerados pelo DataProcessor devem ser persistidos em uma coleção do MongoDb denominada`alarms`. Cada alarme deve ser um documento com os seguintes campos
-
-- `machine_id` -  string contendo identificador único da máquina
-- `sensor_id` - string com nome do sensor que está sendo monitorado
-- `description` - string com uma descrição textual do alarme. 
+Os alarmes gerados pelo DataProcessor devem ser persistidos no Graphite usando uma `metric path` do tipo `machine-id`.`alarms`.`alarm-type`.  Toda vez que um alarme for detectado, o valor 1, deve ser enviado ao Graphite.
  
-Para o alarme de inatividade, por exemplo, a descrição pode ser "Sensor inativo por dez períodos de tempo previstos".
+Para o alarme de inatividade, por exemplo, o nome pode ser `inactive`.
 
 Ao projetar e implementar o módulo DataProcessor, lembre-se de que ele precisa ser capaz de processar dados de múltiplas máquinas e sensores simultaneamente, de modo a não perder ou atrasar a leitura de mensagens de qualquer tópico. Isso pode exigir o uso de técnicas de programação concorrente ou assíncrona.
 
 ## Banco de Dados
 
-Como mencionado, o repositório utiliza o MongoDB como banco de dados. Lembre-se que isso é apenas uma sugestão, vocês podem utilizar outro banco de dados a sua escolha.
+Como mencionado, o repositório utiliza o Graphite (whisper) como banco de dados de séries temporais. 
 
-O repositório já tem uma extensão do Mongo para Visual Studio Code pre definida no devcontainer.
+O Graphite tem uma API bem simples para envio de dados via protocolo TCP/IP denominado [Plain-Text Protocol](https://graphite.readthedocs.io/en/latest/feeding-carbon.html#the-plaintext-protocol)
 
-Para acessar o Mongo e visualizar os dados persistidos, realize os seguintes passos:
-
-1. Clique no ícone de uma folha na barra lateral esquerda
-2. Clique em `Add connection`
-3. Clique em `Open Form` em `Advanced Connection Settings`
-4. Modifique o valor do campo `Hostname` para `db` e clique em `Connect`
-
-Se os passos forem executados com êxito, voce terá acesso a uma árvore de navegação das coleções do banco na aba lateral esquerda.
+O servidor Graphite está configurado para ser acessado via endereço `graphite`, porta 2003.

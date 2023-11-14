@@ -8,6 +8,8 @@
 
 #define QOS 1
 #define BROKER_ADDRESS "tcp://localhost:1883"
+#define GRAPHITE_HOST "graphite"
+#define GRAPHITE_PORT 2003
 
 void post_metric(const std::string& machine_id, const std::string& sensor_id, const std::string& timestamp_str, const int value) {
 
@@ -25,7 +27,6 @@ std::vector<std::string> split(const std::string &str, char delim) {
 
 int main(int argc, char* argv[]) {
     std::string clientId = "clientId";
-    mqtt::client client(BROKER_ADDRESS, clientId);
 
     // Create an MQTT callback.
     class callback : public virtual mqtt::callback {
@@ -41,7 +42,6 @@ int main(int argc, char* argv[]) {
 
             std::string timestamp = j["timestamp"];
             int value = j["value"];
-
             post_metric(machine_id, sensor_id, timestamp, value);
         }
     };
