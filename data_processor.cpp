@@ -27,6 +27,7 @@ std::vector<std::string> split(const std::string &str, char delim) {
 
 int main(int argc, char* argv[]) {
     std::string clientId = "clientId";
+    mqtt::async_client client(BROKER_ADDRESS, clientId);
 
     // Create an MQTT callback.
     class callback : public virtual mqtt::callback {
