@@ -107,7 +107,7 @@ Além disso, o dataProcessor também irá realizar dois tipos de processamento p
 1. **Alarme de Inatividade:** O DataProcessor deve gerar um alarme sempre que um dado de um sensor não for enviado por dez períodos de tempo previstos. Este é um indicador de que algo pode estar errado com o sensor ou com a máquina que está sendo monitorada.
 2. **Processamento Personalizado:** Vocês devem definir um segundo tipo de processamento para as leituras dos sensores. Isso pode ser qualquer tipo de análise ou cálculo baseado nos dados do sensor. Algumas ideias podem incluir cálculos de média móvel, detecção de outliers ou análise de tendências.
 
-Os alarmes gerados pelo DataProcessor devem ser persistidos no banco de dados de series temporais usando uma `metric path` do tipo `machine-id`.`alarms`.`alarm-type`.  Toda vez que um alarme for detectado, o valor 1, deve ser enviado ao Graphite.
+Os alarmes gerados pelo DataProcessor devem ser persistidos no banco de dados de series temporais usando uma `metric path` do tipo `machine-id`.`alarms`.`alarm-type`.  Toda vez que um alarme for detectado, o valor 1, deve ser enviado ao banco de dados de series temporais.
  
 Para o alarme de inatividade, por exemplo, o nome pode ser `inactive`.
 
